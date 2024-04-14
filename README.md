@@ -1,18 +1,18 @@
-# virtuoso-design-hierarchy
+<h1>virtuoso-design-hierarchy</h1>
 
 [TOC]
 
-## Requirements
+## 项目依赖
 
 + skill-loader [ [GitHub](https://github.com/yeungchie/skill-loader "https://github.com/yeungchie/skill-loader") / [Gitee](https://gitee.com/yeungchie/skill-loader "https://gitee.com/yeungchie/skill-loader") ]
 
-## Namespace
+## 命名空间
 
 `ycDesignHier`
 
-## Quick Start
+## 快速入门
 
-### Craete Tree by CellView
+### 创建 Tree
 
 ```lisp
 cvId = dbOpenCellViewByType("lib" "cell" "view")
@@ -20,7 +20,7 @@ tree = ycDesignHier::createTree(cvId)
 ; => Tree:{lib/cell/view}
 ```
 
-### Dump Tree to File
+### 导出 Tree 到文件
 
 ```lisp
 ycDesignHier::treeDump(tree "design_hierarchy.tree")
