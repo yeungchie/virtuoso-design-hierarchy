@@ -5,7 +5,7 @@
 ;--------------------------
 useNamespace("ycDesignHier")
 
-procedure(treeDump(tree file "gt")
+procedure(treeDump(tree file \@key fullStatusInfo "gtg")
     unless(className(tree) == 'Tree
         ycError("argument #1 should be a %A object - %A" 'Tree className(tree))
     )
@@ -18,10 +18,24 @@ procedure(treeDump(tree file "gt")
                 strcat(lsprintf("%%%ds" width) "%s %s %s (%d)%s\n")
                 "" item~>lib item~>cell item~>view getItemNumInst(item)
                 case(item~>status
-                    ("normal"   "")
-                    ("unbound"  " *UNBOUND*")
-                    ("lostsch"  " *LOSTSCH*")
-                    (t          " *UNKNOWN*")
+                    ("normal"
+                        ""
+                    )
+                    ("unbound"
+                        " *UNBOUND*"
+                    )
+                    ("lostsch"
+                        if(fullStatusInfo
+                            " *LOSTSCH*"
+                            ""
+                        )
+                    )
+                    (t
+                        if(fullStatusInfo
+                            " *UNKNOWN*"
+                            ""
+                        )
+                    )
                 )
             )
             foreach(x item~>tree~>items
