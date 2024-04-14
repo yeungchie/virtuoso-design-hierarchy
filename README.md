@@ -1,4 +1,4 @@
-<h1>virtuoso-design-hierarchy</h1>
+# virtuoso-design-hierarchy
 
 [TOC]
 
@@ -24,6 +24,13 @@ tree = ycDesignHier::createTree(cvId)
 
 ```lisp
 ycDesignHier::treeDump(tree "design_hierarchy.tree")
+; => t
+```
+
+原理图单元导出完整状态信息：
+
+```lisp
+ycDesignHier::treeDump(tree "design_hierarchy.tree" ?fullStatusInfo t)
 ; => t
 ```
 
