@@ -5,21 +5,22 @@
 ;--------------------------
 useNamespace("ycDesignHier")
 
-procedure(createTree(cvId \@key depth current(0) "dgx")
+procedure(createTree(cvId \@key depth current(0) _treeMem(makeTable("" nil)) "dgxo")
     when(depth && (!fixp(depth) || (depth < 0))
         ycError("argument for key ?depth should be a fixnum and >= 0 - %A" depth)
     )
-    Tree(
+    _treeMem[cvId] = _treeMem[cvId] || Tree(
         ?cellView cvId
         ?items createItems(
             cvId
             ?depth depth
             ?current current
+            ?_treeMem _treeMem
         )
     )
 )
 
-procedure(createItems(cvId \@key depth current(0) "dgx")
+procedure(createItems(cvId \@key depth current(0) _treeMem(makeTable("" nil)) "dgxo")
     when(depth && (!fixp(depth) || (depth < 0))
         ycError("argument for key ?depth should be a fixnum and >= 0 - %A" depth)
     )
@@ -45,6 +46,7 @@ procedure(createItems(cvId \@key depth current(0) "dgx")
                                 master
                                 ?depth depth
                                 ?current current+1
+                                ?_treeMem _treeMem
                             )
                         )
                         setItemStatus(item "lostsch")
