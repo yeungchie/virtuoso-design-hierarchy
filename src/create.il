@@ -44,7 +44,7 @@ procedure(createItems(cvId \@key depth current(0) _treeMem(makeTable("" nil)) "d
                     when(master~>cellViewType == "schematicSymbol"
                         nth(2 lcv) := "schematic"
                     )
-                    if(apply('ddGetObj lcv) && (master = apply('dbOpenCellViewByType lcv))
+                    if(apply('ddGetObj lcv) && (master = (apply('dbFindOpenCellView ddGetObj(car(lcv)) cdr(lcv)) || apply('dbOpenCellViewByType lcv)))
                         setItemTree(item
                             createTree(
                                 master
