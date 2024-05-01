@@ -9,14 +9,7 @@ procedure(makeInstGroups(cvId "d")
     let((groups)
         groups = makeTable("InstanceTable" nil)
         foreach(inst cvId~>instances
-            let((key)
-                key = list(
-                    inst~>libName
-                    inst~>cellName
-                    inst~>viewName
-                )
-                groups[key] = cons(inst groups[key])
-            )
+            groups[inst~>master] = cons(inst groups[inst~>master])
         )
         groups
     )

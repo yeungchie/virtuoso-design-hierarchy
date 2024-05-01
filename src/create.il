@@ -26,10 +26,9 @@ procedure(createItems(cvId \@key depth current(0) _treeMem(makeTable("" nil)) "d
     )
     let((groups)
         groups = makeInstGroups(cvId)
-        foreach(mapcar lcv groups~>?
-            let((insts master status item)
-                insts  = groups[lcv]
-                master = car(insts)~>master
+        foreach(mapcar master groups~>?
+            let((insts status item lcv)
+                insts  = groups[master]
                 status = master && "normal" || "unbound"
                 item = Item(
                     ?master master
@@ -37,6 +36,11 @@ procedure(createItems(cvId \@key depth current(0) _treeMem(makeTable("" nil)) "d
                     ?insts  insts
                 )
                 when((status != "unbound") && (!depth || (current < depth))
+                    lcv = list(
+                        master~>libName
+                        master~>cellName
+                        master~>viewName
+                    )
                     when(master~>cellViewType == "schematicSymbol"
                         nth(2 lcv) := "schematic"
                     )
