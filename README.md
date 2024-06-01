@@ -2,7 +2,7 @@
 
 ## 项目依赖
 
-+ skill-loader [ [GitHub](https://github.com/yeungchie/skill-loader "https://github.com/yeungchie/skill-loader") / [Gitee](https://gitee.com/yeungchie/skill-loader "https://gitee.com/yeungchie/skill-loader") ]
++ [skill-loader](https://github.com/yeungchie/skill-loader "https://github.com/yeungchie/skill-loader")
 
 ## 命名空间
 
