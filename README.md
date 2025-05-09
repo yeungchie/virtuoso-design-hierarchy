@@ -8,7 +8,7 @@
 
 `ycDesignHier`
 
-## 快速入门
+## 快速使用
 
 ### 创建 Tree
 

@@ -5,7 +5,8 @@
 ;--------------------------
 useNamespace("ycDesignHier")
 
-procedure(createTree(cvId \@key depth current(0) _treeMem(makeTable("" nil)) "dgxo")
+
+procedure(createTree(cvId \@key depth current(0) _treeMem(makeTable("" nil)) "dgxo")  ; -> Tree
     when(depth && (!fixp(depth) || (depth < 0))
         ycError("argument for key ?depth should be a fixnum and >= 0 - %A" depth)
     )
@@ -20,7 +21,8 @@ procedure(createTree(cvId \@key depth current(0) _treeMem(makeTable("" nil)) "dg
     )
 )
 
-procedure(createItems(cvId \@key depth current(0) _treeMem(makeTable("" nil)) "dgxo")
+
+procedure(createItems(cvId \@key depth current(0) _treeMem(makeTable("" nil)) "dgxo")  ; -> list[Item]
     when(depth && (!fixp(depth) || (depth < 0))
         ycError("argument for key ?depth should be a fixnum and >= 0 - %A" depth)
     )
@@ -55,6 +57,24 @@ procedure(createItems(cvId \@key depth current(0) _treeMem(makeTable("" nil)) "d
                 item
             )
         )
+    )
+)
+
+
+procedure(makeInstGroups(cvId "d")  ; -> table[("libName" "cellName" "viewName"), list[inst]]
+    let((groups)
+        groups = makeTable("InstanceTable" nil)
+        foreach(inst cvId~>instances
+            let((key)
+                key = list(
+                    inst~>libName
+                    inst~>cellName
+                    inst~>viewName
+                )
+                groups[key] = cons(inst groups[key])
+            )
+        )
+        groups
     )
 )
 

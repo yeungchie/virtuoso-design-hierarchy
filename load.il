@@ -6,21 +6,20 @@
 makeNamespace("ycDesignHier")
 addToNamespace("ycDesignHier"
     mapcar('symbolToString '(
+        ; class
         Node Tree Item setTreeItems setItemTree setItemStatus
-        makeInstGroups createTree createItems
+
+        ; create
+        createTree createItems makeInstGroups
+
+        ; utils
         getTreeDepth getItemNumInst getTimeStamp treeDump
     ))
 )
-
 unuseNamespace("ycDesignHier")
 
 ycLoad("src/class.il")
-ycLoad("src/printself.il")
 ycLoad("src/create.il")
-ycLoad("src/getTreeDepth.il")
-ycLoad("src/getItemNumInst.il")
-ycLoad("src/makeInstGroups.il")
-ycLoad("src/getTimeStamp.il")
-ycLoad("src/treeDump.il")
+ycLoad("src/utils.il")
 
 ; END

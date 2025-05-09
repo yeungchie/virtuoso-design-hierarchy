@@ -1,11 +1,66 @@
 ;--------------------------
-; Program  : virtuoso-design-hierarchy(treeDump.il)
+; Program  : virtuoso-design-hierarchy(utils.il)
 ; Language : Cadence Skill
 ; Author   : YEUNGCHIE
 ;--------------------------
 useNamespace("ycDesignHier")
 
-procedure(treeDump(tree file \@key fullStatusInfo "gtg")
+
+procedure(getTreeDepth(tree)  ; -> int
+    unless(className(tree) == 'Tree
+        ycError("argument #1 should be a %A object - %A" 'Tree className(tree))
+    )
+    let((depth(0))
+        foreach(item tree~>items
+            when(item~>tree && (item~>tree != 'unbound)
+                depth = max(depth 1+getTreeDepth(item~>tree))
+            )
+        )
+        depth
+    )
+)
+
+
+procedure(getItemNumInst(item)  ; -> int
+    unless(className(item) == 'Item
+        ycError("argument #1 should be a %A object - %A" 'Item className(item))
+    )
+    let((sum(0))
+        foreach(inst item~>insts
+            sum += case(inst~>objType
+                ("inst"
+                    inst~>numInst
+                )
+                ("mosaic"
+                    inst~>rows*inst~>columns
+                )
+                (t
+                    ycWarn("unsupported object type - %A, increment one" inst~>objType)
+                    1
+                )
+            )
+        )
+        sum
+    )
+)
+
+
+procedure(getTimeStamp()  ; -> str
+    let((tm)
+        tm = timeToTm(stringToTime(getCurrentTime()))
+        lsprintf("%02d-%02d-%02d %02d:%02d:%02d"
+            tm~>tm_year+1900
+            tm~>tm_mon+1
+            tm~>tm_mday
+            tm~>tm_hour
+            tm~>tm_min
+            tm~>tm_sec
+        )
+    )
+)
+
+
+procedure(treeDump(tree file \@key fullStatusInfo "gtg")  ; -> bool
     unless(className(tree) == 'Tree
         ycError("argument #1 should be a %A object - %A" 'Tree className(tree))
     )
@@ -63,6 +118,7 @@ procedure(treeDump(tree file \@key fullStatusInfo "gtg")
         flag
     )
 )
+
 
 unuseNamespace("ycDesignHier")
 ; END
