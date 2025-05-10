@@ -55,7 +55,7 @@ defclass(Tree (Node)
         )
         (items
             \@initarg items
-            ; \@writer  setTreeItems
+            \@writer  setTreeItems
         )
     )
 )
