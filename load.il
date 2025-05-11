@@ -13,7 +13,7 @@ addToNamespace("ycDesignHier"
         createTree createItems makeInstGroups
 
         ; utils
-        getTreeDepth getItemNumInst getTimeStamp treeDump
+        getTreeDepth getItemNumInst getTimeStamp treeDump treeFlatten
     ))
 )
 unuseNamespace("ycDesignHier")

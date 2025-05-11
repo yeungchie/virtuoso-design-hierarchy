@@ -120,5 +120,24 @@ procedure(treeDump(tree file \@key fullStatusInfo "gtg")  ; -> bool
 )
 
 
+procedure(treeFlatten(tree)  ; -> list[Item]
+    unless(className(tree) == 'Tree
+        ycError("argument #1 should be a %A object - %A" 'Tree className(tree))
+    )
+    let((paths)
+        flatten = lambda((lastPath tree) let((path)
+            foreach(item tree~>items
+                path = nconc(copy(lastPath) list(item))
+                paths = tconc(paths path)
+                funcall(flatten path item~>tree)
+            )
+            t
+        ))
+        funcall(flatten list() tree)
+        car(paths)
+    )
+)
+
+
 unuseNamespace("ycDesignHier")
 ; END
